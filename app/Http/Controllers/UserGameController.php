@@ -3,9 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Game;
 
-class UserController extends Controller
+class UserGameController extends Controller
 {
+
+    // 내 게임 출력
+    public function games(User $user)
+    {
+        $games = $user->games()->orderBy('created_at', 'desc')->get();
+
+    return view('user.games', ['games' => $games, 'user' => $user]);
+    }
+
     /**
      * Display a listing of the resource.
      */

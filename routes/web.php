@@ -4,8 +4,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\GameController;
-use App\Http\Controllers\ChessController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserGameController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,9 +33,15 @@ Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('c
 Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 
 Route::get('/game', [GameController::class, 'index'])->name('game');
+Route::post('/save-pgn', [GameController::class, 'savePgn']);
+
 
 Route::resource('/posts', PostController::class);
-Route::resource('/chess', ChessController::class);
-Route::resource('/users', UserController::class);
+Route::resource('/users', UserGameController::class);
+
+Route::get('/users/{user}/games', [UserGameController::class, 'games'])->name('user.games');
+Route::get('/games/{game}', [GameController::class, 'show'])->name('game.show');
+
+
 
 require __DIR__.'/auth.php';

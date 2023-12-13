@@ -1,20 +1,20 @@
 import './bootstrap';
 import '../css/app.css';
-
 import Alpine from 'alpinejs';
+import { Chess } from 'chess.js';
 
-import {Chess} from 'chess.js';
+window.Alpine = Alpine;
 
 document.addEventListener('DOMContentLoaded', (event) => {
     var board,
-        game = new Chess();
+        game = new Chess(window.pgn);
 
-    //check the chessboard global object
     if (typeof ChessBoard !== 'undefined') {
-        board = ChessBoard('myBoard', 'start');
+        board = ChessBoard('myBoard', {
+            position: game.fen(),
+            draggable: false
+        });
     }
 });
-
-window.Alpine = Alpine;
 
 Alpine.start();

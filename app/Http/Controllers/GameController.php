@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GameController extends Controller
 {
@@ -12,6 +14,24 @@ class GameController extends Controller
     public function index()
     {
         return view('game');
+    }
+
+    public function savePgn(Request $request)
+    {
+        // PGN 데이터를 받음
+        $pgn = $request->input('pgn');
+
+        // 인증된 사용자를 가져옴
+        $user = Auth::user();
+
+        // 새 게임 인스턴스를 생성하고 데이터를 저장
+        $game = new Game;
+        $game->user_id = $user->id;
+        $game->pgn = $pgn;
+        $game->save();
+
+        // 성공적으로 저장되었다면, 성공 응답을 반환
+        return response()->json(['success' => true]);
     }
 
     /**
@@ -33,9 +53,9 @@ class GameController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Game $game)
     {
-        //
+        return view('games.show', ['game' => $game]);
     }
 
     /**

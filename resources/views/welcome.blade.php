@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="kr">
 
 <head>
     <meta charset="utf-8">
@@ -33,12 +33,17 @@
     @endif
     <div class="min-h-screen flex items-center justify-center">
         <div class="max-w-md w-full px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-            <h1 class="mb-4 text-xl font-bold text-center">Welcome</h1>
+            <h1 class="mb-4 text-xl font-bold text-center">Chess Game Site</h1>
             <div class="space-y-6">
                 <a href="{{ route('game') }}"
                     class="block w-full px-6 py-2 text-center text-white bg-gray-900 hover:bg-gray-800 rounded">게임</a>
                 <a href="{{route('posts.index')}}"
                     class="block w-full px-6 py-2 text-center text-white bg-gray-500 hover:bg-gray-600 rounded">게시판</a>
+                @auth
+                <a href="{{ route('user.games', auth()->id()) }}"
+                    class="block w-full px-6 py-2 text-center text-white bg-green-500 hover:bg-green-600 rounded">내
+                    게임</a>
+                @endauth
             </div>
         </div>
     </div>
