@@ -23,14 +23,7 @@
         @endif
     </div>
 
-    <a href="{{ route('posts.index') }}"
-        class="text-blue-500 hover:text-blue-600 bg-gray-200 px-2 py-2 rounded-lg shadow-lg absolute top-20 right-4">글 목록으로</a>
-
-    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow chessboard">
-        <div class="prose dark:prose-dark max-w-none">
-            {!! nl2br(e($post->body)) !!}
-        </div>
-    </div>
+    
 
     <!-- 댓글 -->
     @if(Auth::check())
@@ -70,6 +63,15 @@
         </div>
     </div>
     @endforeach
+
+    <a href="{{ route('posts.index') }}"
+        class="text-blue-500 hover:text-blue-600 bg-gray-200 px-2 py-2 rounded-lg shadow-lg">글 목록으로</a>
+
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow chessboard">
+        <div class="prose dark:prose-dark max-w-none">
+            {!! nl2br(e($post->body)) !!}
+        </div>
+    </div>
 
 
 </div>
